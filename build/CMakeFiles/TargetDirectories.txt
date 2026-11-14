@@ -1,3 +1,0 @@
-/workspaces/kvstore/build/CMakeFiles/kvstore.dir
-/workspaces/kvstore/build/CMakeFiles/edit_cache.dir
-/workspaces/kvstore/build/CMakeFiles/rebuild_cache.dir
