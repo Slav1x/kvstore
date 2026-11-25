@@ -1,0 +1,26 @@
+name: build and test
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          cmake -S . -B build
+          cmake --build build
+
+      - name: Unit tests
+        run: ./build/kvstore_tests
+
+      - name: CLI demo (data survives a restart)
+        run: |
+          printf 'put name slavik\nput motto build first\nstats\nquit\n' | ./build/kvstore demo.log
+          echo "--- program closed and reopened ---"
+          printf 'get name\nget motto\nstats\nquit\n' | ./build/kvstore demo.log
+
+      - name: Benchmark
+        run: ./build/kvstore_bench
